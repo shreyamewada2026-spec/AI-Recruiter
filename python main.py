@@ -1,14 +1,15 @@
 import re
 import json
 
+# PART 1
 languages = [
-    "Python", "Java", "C++", "C", "JavaScript", "HTML", "CSS",
-    "SQL", "R"
+    "Python", "Java", "C++", "C", "JavaScript",
+    "HTML", "CSS", "SQL", "R"
 ]
 
 technologies = [
-    "CNN", "TensorFlow", "PyTorch", "OpenCV", "React",
-    "Django", "Flask", "Git", "Docker"
+    "CNN", "TensorFlow", "PyTorch", "OpenCV",
+    "React", "Django", "Flask", "Git", "Docker"
 ]
 
 skills = [
@@ -19,6 +20,7 @@ skills = [
 
 
 def extract_information(text):
+
     result = {
         "skill": [],
         "technology": [],
@@ -41,46 +43,76 @@ def extract_information(text):
 
     return result
 
-
-text = input("Describe your experience: ")
-
-output = extract_information(text)
-
-print(json.dumps(output, indent=4))
-
+# PART 2
 jobs = {
-    "AI Engineer": ["Python", "AI", "Machine Learning", "CNN"],
-    "Web Developer": ["Python", "HTML", "CSS", "JavaScript"],
-    "Data Scientist": ["Python", "Machine Learning", "SQL", "Data Science"]
+    "AI Engineer": [
+        "Python", "AI", "ML", "Machine Learning", "CNN"
+    ],
+
+    "Web Developer": [
+        "Python", "HTML", "CSS", "JavaScript"
+    ],
+
+    "Data Scientist": [
+        "Python", "ML", "Machine Learning", "SQL", "Data Science"
+    ]
 }
 
 
-candidate_skills = ["Python", "AI", "Machine Learning"]
-
-
 def find_best_job(candidate_skills):
+
     best_job = ""
     best_score = 0
+
+    job_matches = {}
 
     for job, required_skills in jobs.items():
 
         matched = 0
 
         for skill in required_skills:
+
             if skill.lower() in [x.lower() for x in candidate_skills]:
                 matched += 1
 
         percentage = (matched / len(required_skills)) * 100
 
-        print(job, ":", percentage, "%")
+        job_matches[job] = int(percentage)
 
         if percentage > best_score:
             best_score = percentage
             best_job = job
 
-    print()
-    print("You are a good match for", best_job,
-          "(", int(best_score), "% )")
+    return best_job, int(best_score), job_matches
 
 
-find_best_job(candidate_skills)
+text = input("Describe your experience: ")
+
+extracted_info = extract_information(text)
+
+candidate_skills = (
+    extracted_info["skill"]
+    + extracted_info["technology"]
+    + extracted_info["language"]
+)
+
+best_job, best_score, job_matches = find_best_job(candidate_skills)
+
+output = {
+    "input": text,
+
+    "extraction": extracted_info,
+
+    "candidate_skills": candidate_skills,
+
+    "job_matches": job_matches,
+
+    "best_match": {
+        "job": best_job,
+        "match_percentage": best_score
+    },
+
+    "message": f"You are a good match for {best_job} ({best_score}%)"
+}
+
+print(json.dumps(output, indent=4))
