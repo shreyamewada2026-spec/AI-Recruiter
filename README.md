@@ -156,7 +156,7 @@ The system successfully extracts relevant information from conversational input.
 ### Example Input:
 I worked in the AI/ML department and worked with CNN models using Python.
 
-# Example Extraction Result:
+### Example Extraction Result:
 
 ```json
 {
@@ -174,7 +174,7 @@ I worked in the AI/ML department and worked with CNN models using Python.
 ```
 
 The extracted skills can then be compared against job requirements.
-# For example:
+### For example:
 AI Engineer       → 75%
 Web Developer     → 25%
 Data Scientist    → 50%
