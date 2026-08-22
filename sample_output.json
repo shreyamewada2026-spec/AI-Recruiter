@@ -1,0 +1,30 @@
+{
+    "input": "I worked in the AI/ML department and worked with CNN models using Python.",
+    "extraction": {
+        "skill": [
+            "AI",
+            "ML"
+        ],
+        "technology": [
+            "CNN"
+        ],
+        "language": [
+            "Python"
+        ]
+    },
+    "candidate_skills": [
+        "Python",
+        "AI",
+        "Machine Learning"
+    ],
+    "job_matches": {
+        "AI Engineer": 75,
+        "Web Developer": 25,
+        "Data Scientist": 50
+    },
+    "best_match": {
+        "job": "AI Engineer",
+        "match_percentage": 75
+    },
+    "message": "You are a good match for AI Engineer (75%)"
+}
